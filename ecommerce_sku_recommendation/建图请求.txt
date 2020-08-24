@@ -1,0 +1,19 @@
+curl --location --request POST 'http://192.168.2.64:18088/api/login' \
+--header 'Content-Type: application/x-www-form-urlencoded' \
+--data-urlencode 'username=admin' \
+--data-urlencode 'password=By8Xo/cDxAMlSimTy1na7+X48CRmNFrbXPGUaZ48AiGh4zi1NIj+KXqVlw53Q9zPjzPRzKo7PYlNxNyMaGviylPNdFbI0XiiTop7VwCJbccqoddy/vR1tcB0HPNmybtXYl+gWd/rs1lctfJ/E4xxY5t6ZOs9C979mHWkwGcWvWQ='
+
+curl --location --request GET 'http://192.168.2.64:18088/api/buildGraph/innerLoad?path=data/ecommerce_sku_recommendation/graph.json&groupId=1' \
+--header 'Authorization: eyJhbGciOiJIUzI1NiJ9.eyJjcmVhdGV0aW1lIjoxNTk3OTA0MzczMjM4LCJpZCI6IjAiLCJsZGFwVXNlciI6MCwidXNlcm5hbWUiOiJhZG1pbiJ9.v2VlDxhfeLA7Vjr36-5-3Om-sHuHV2Ivw0EmKb2zRlg'
+
+create index on :sku(brand);
+create index on :sku(category);
+call db.indexes();
+
+MATCH (a:user),(b:sku)
+WHERE (a.id = '02136866' or a.id='07490259') AND b.id = '62068704536'
+CREATE (a)-[r:purchase]->(b)
+RETURN r
+
+match (s1:sku)-[p1]-(u:user)-[p2]-(s2:sku)  WHERE s1.id="68557618811"
+RETURN s1,p1,u,p2,s2

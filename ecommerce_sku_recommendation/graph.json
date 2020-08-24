@@ -1,0 +1,126 @@
+{
+  "graphName": "ecommerce_sku_recommendation",
+  "vertexTypes": [
+    {
+      "name": "sku",
+      "primaryAsProperty": true,
+      "properties": [
+        {
+          "name": "id",
+          "type": "STRING",
+          "primaryKey": true
+        },
+        {
+          "name": "title",
+          "type": "STRING",
+          "primaryKey": false
+        },
+        {
+          "name": "brand",
+          "type": "STRING",
+          "primaryKey": false
+        },
+        {
+          "name": "category",
+          "type": "STRING",
+          "primaryKey": false
+        },
+        {
+          "name": "price",
+          "type": "DOUBLE",
+          "primaryKey": false
+        },
+        {
+          "name": "comment_num",
+          "type": "INT",
+          "primaryKey": false
+        }
+      ]
+    },
+    {
+      "name": "user",
+      "primaryAsProperty": true,
+      "properties": [
+        {
+          "name": "id",
+          "type": "STRING",
+          "primaryKey": true
+        }
+      ]
+    }
+  ],
+  "edgeTypes": [
+    {
+      "name": "purchase",
+      "fromVertexType": "user",
+      "toVertexType": "sku",
+      "isDirected": true,
+      "properties": []
+    }
+  ],
+  "loadFiles": [
+    {
+      "type": "Vertex",
+      "targetType": "user",
+      "file": "data/ecommerce_sku_recommendation/purchase.csv",
+      "delimiter": ",",
+      "hasHeader": false,
+      "mappings": [
+        {
+          "mappingName": "id",
+          "mappingIndex": 0
+        }
+      ]
+    },
+    {
+      "type": "Vertex",
+      "targetType": "sku",
+      "file": "data/ecommerce_sku_recommendation/jd_itbcpn.csv",
+      "delimiter": ",",
+      "hasHeader": false,
+      "mappings": [
+        {
+          "mappingName": "id",
+          "mappingIndex": 0
+        },
+        {
+          "mappingName": "title",
+          "mappingIndex": 1
+        },
+        {
+          "mappingName": "brand",
+          "mappingIndex": 2
+        },
+        {
+          "mappingName": "category",
+          "mappingIndex": 3
+        },
+        {
+          "mappingName": "price",
+          "mappingIndex": 4
+        },
+        {
+          "mappingName": "comment_num",
+          "mappingIndex": 5
+        }
+      ]
+    },
+    {
+      "type": "Edge",
+      "targetType": "purchase",
+      "file": "data/ecommerce_sku_recommendation/purchase.csv",
+      "delimiter": ",",
+      "hasHeader": false,
+      "mappings": [
+        {
+          "mappingName": "~from",
+          "mappingIndex": 0
+        },
+        {
+          "mappingName": "~to",
+          "mappingIndex": 1
+        }
+      ]
+    }
+  ]
+}
